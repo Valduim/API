@@ -11,7 +11,7 @@ async function funSumar() {
     var num1 = parseInt(document.getElementById("numero1").value);
     var num2 = parseInt(document.getElementById("numero2").value);
 
-    /*if(isNaN(num1) || isNaN(num2)){
+    if(isNaN(num1) || isNaN(num2)){
         alert("Los campos no estan rellenos")
     } else{
         var petSuma = await fetch(urlSuma, {
@@ -30,9 +30,9 @@ async function funSumar() {
             document.getElementById("resultado").innerHTML = resultado;
         }
     
-    }*/
-    var resultado = num1 + num2;
-    document.getElementById("resultado").innerHTML = resultado;
+    }
+    //var resultado = num1 + num2;
+    //document.getElementById("resultado").innerHTML = resultado;
 
 }
 
@@ -40,7 +40,7 @@ async function funMultiplicar(){
     var num1 = parseInt(document.getElementById("numero1").value);
     var num2 = parseInt(document.getElementById("numero2").value);
 
-    /*if(isNaN(num1) || isNaN(num2)){
+    if(isNaN(num1) || isNaN(num2)){
         alert("Los campos no estan rellenos")
     } else{
         var petMulti = await fetch(urlMulti, {
@@ -55,10 +55,11 @@ async function funMultiplicar(){
         {
             const data = await petMulti.json();
             //Hacemos algo con los datos de vuelta.
-            
+            var resultado = data.resultado;
+            document.getElementById("resultado").innerHTML = resultado;
         }
-    }*/
+    }
 
-    var resultado = num1 * num2;
-    document.getElementById("resultado").innerHTML = resultado;
+    //var resultado = num1 * num2;
+    //document.getElementById("resultado").innerHTML = resultado;
 }
