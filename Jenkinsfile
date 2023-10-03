@@ -1,47 +1,33 @@
 pipeline {
-  agent any
+    agent any
 
-  tools {nodejs "node"}
-
-  stages {
-
-    //REPOSITORIO
-    stage('Git') {
-      steps {
-        git 'https://github.com/Valduim/API.git'
-      }
+    environment {
+        mavenHome = tool 'jenkins-maven'
     }
 
-    //NODE BUILD
-    stage('Build and Test Node.js App') {
+    tools {
+        jdk 'java-17'
+    }
+
+    stages {
+
+        stage('Build'){
             steps {
-                sh 'npm install'
-                sh 'npm test'
-                sh 'npm run'
-                sh 'npm build'
+                //bat "mvn clean install -DskipTests"
+                bat 'echo "mvn clean install -DskipTests"'
             }
-        } 
+        }
 
-    //JAVA BUILD
-    stage('Build and Test Spring Boot App') {
+        /* stage('Test'){
+            steps{
+                bat "mvn test"
+            }
+        }
+
+        stage('Deploy') {
             steps {
-                sh './mvnw clean package'  // Construir la aplicación Spring Boot
-                sh './mvnw test'           // Ejecutar pruebas de Spring Boot
+                bat "mvn jar:jar deploy:deploy"
             }
-        } 
-
-      /*   //IMAGE BUILD
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t mi-app:latest .'  // Construir la imagen Docker
-            }
-        } 
-
-
-    stage('Test') {
-      steps {
-        sh 'node test'
-      }
-    }*/
-  }
+        } */
+    }
 }
