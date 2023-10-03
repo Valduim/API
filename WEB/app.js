@@ -1,8 +1,8 @@
 var suma = document.getElementById("btnSumar");
 var multiplicar = document.getElementById("btnMultiplicar");
 
-var urlSuma = "localhost:5000/sumar";
-var urlMulti = "localhost:5000/multiplicar";
+var urlSuma = "http://localhost:5000/sumar";
+var urlMulti = "http://localhost:5000/multiplicar";
 
 suma.addEventListener("click", funSumar);
 multiplicar.addEventListener("click", funMultiplicar);
@@ -14,20 +14,23 @@ async function funSumar() {
     if(isNaN(num1) || isNaN(num2)){
         alert("Los campos no estan rellenos")
     } else{
-        var petSuma = await fetch(urlSuma, {
+        var urlEncoded = urlSuma + '?numero1=' + num1 + '&numero2=' + num2;
+        var petSuma = await fetch(urlEncoded, {
             method: 'POST', //usar POST, GET u otros métodos según la API
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'*'
             },
-            body: JSON.stringify({ numero1: num1, numero2: num2 })
+            body: '',
+            mode: 'cors'
         })
 
         if (petSuma.ok)
         {
             const data = await petSuma.json();
             //Hacemos algo con los datos de vuelta.
-            var resultado = data.resultado;
-            document.getElementById("resultado").innerHTML = resultado;
+            //var resultado = data.resultado;
+            document.getElementById("resultado").innerHTML = data;
         }
     
     }
@@ -43,20 +46,22 @@ async function funMultiplicar(){
     if(isNaN(num1) || isNaN(num2)){
         alert("Los campos no estan rellenos")
     } else{
-        var petMulti = await fetch(urlMulti, {
+        var urlEncoded = urlMulti + '?numero1=' + num1 + '&numero2=' + num2;
+        var petMulti = await fetch(urlEncoded, {
             method: 'POST', //usar POST, GET u otros métodos según la API
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ numero1: num1, numero2: num2 })
+            body: JSON.stringify({ numero1: num1, numero2: num2 }),
+            mode: 'cors'
         })
 
         if (petMulti.ok)
         {
             const data = await petMulti.json();
             //Hacemos algo con los datos de vuelta.
-            var resultado = data.resultado;
-            document.getElementById("resultado").innerHTML = resultado;
+            //var resultado = data.resultado;
+            document.getElementById("resultado").innerHTML = data;
         }
     }
 
