@@ -15,7 +15,7 @@ async function funSumar() {
         alert("Los campos no estan rellenos")
     } else{
         var petSuma = await fetch(urlSuma, {
-            method: 'POST', // Puedes usar POST, GET u otros métodos según la API
+            method: 'POST', //usar POST, GET u otros métodos según la API
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -44,7 +44,7 @@ async function funMultiplicar(){
         alert("Los campos no estan rellenos")
     } else{
         var petMulti = await fetch(urlMulti, {
-            method: 'POST', // Puedes usar POST, GET u otros métodos según la API
+            method: 'POST', //usar POST, GET u otros métodos según la API
             headers: {
                 'Content-Type': 'application/json'
             },
